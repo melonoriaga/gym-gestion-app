@@ -23,7 +23,12 @@ export default {
           },
         },
       },
-      NotFound: '*',
+	  NotFound: '*',
+	  Login: {
+		screens: {
+			LoginScreen: 'login',
+		},
+	  }
     },
   },
 };
