@@ -61,7 +61,14 @@ function TabOneNavigator() {
       <TabOneStack.Screen
         name="TabOneScreen"
         component={TabOneScreen}
-        options={{ headerTitle: 'Tab One Title' }}
+        options={{
+			headerTitle: 'Aca los compas',
+			headerStyle: {
+				backgroundColor: '#5d54a4',
+			},
+			headerTintColor: '#fff',
+			headerTitleAlign: 'center'
+		}}
       />
     </TabOneStack.Navigator>
   );
@@ -75,7 +82,14 @@ function TabTwoNavigator() {
       <TabTwoStack.Screen
         name="TabTwoScreen"
         component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
+		options={{
+			headerTitle: 'Aca las rutinas',
+			headerStyle: {
+				backgroundColor: '#a37eba',
+			},
+			headerTintColor: '#fff',
+			headerTitleAlign: 'center'
+		}}
       />
     </TabTwoStack.Navigator>
   );
@@ -89,7 +103,14 @@ function TabThreeNavigator() {
       <TabThreeStack.Screen
         name="TabThreeScreen"
         component={TabThreeScreen}
-        options={{ headerTitle: 'Tab Three Title' }}
+		options={{
+			headerTitle: 'Aca mi perfil',
+			headerStyle: {
+				backgroundColor: '#006a71',
+			},
+			headerTintColor: '#fff',
+			headerTitleAlign: 'center'
+		}}
       />
     </TabThreeStack.Navigator>
   );

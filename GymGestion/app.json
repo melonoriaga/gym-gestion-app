@@ -23,6 +23,8 @@
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
-    }
+    },
+    "description": "app de gimnasios y entrenadores",
+    "githubUrl": "https://github.com/melonoriaga/gym-gestion-app"
   }
 }
