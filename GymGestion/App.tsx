@@ -1,25 +1,26 @@
 import 'react-native-gesture-handler';
 
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
-import Navigation from './navigation';
+import AppGym from './screens/AppGym';
+
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './actions/reducers.js';
+
+const store = createStore(reducer);
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
 
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
-        <StatusBar backgroundColor="#5d54a4" />
-        <Navigation colorScheme={colorScheme} />
-      </SafeAreaProvider>
+      <Provider store={store}>
+        <AppGym />
+      </Provider>
     );
   }
 }
