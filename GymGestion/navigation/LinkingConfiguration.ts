@@ -4,31 +4,51 @@ export default {
   prefixes: [Linking.makeUrl('/')],
   config: {
     screens: {
-      Root: {
-        screens: {
-          TabOne: {
+        Root: {
             screens: {
-              TabOneScreen: 'one',
+                TabOne: {
+                    screens: {
+                        TabOneScreen: 'one',
+                    },
+                },
+                TabTwo: {
+                    screens: {
+                        TabTwoScreen: 'two',
+                    },
+                },
+                TabThree: {
+                    screens: {
+                        TabThreeScreen: 'three',
+                    },
+                },
+                TabSetting: {
+                    screens: {
+                        TabSettingScreen: 'Setting',
+                    },
+                },
             },
-          },
-          TabTwo: {
-            screens: {
-              TabTwoScreen: 'two',
-            },
-		  },
-		  TabThree: {
-            screens: {
-				TabThreeScreen: 'three',
-            },
-          },
         },
-      },
-	  NotFound: '*',
-	  Login: {
-		screens: {
-			LoginScreen: 'login',
-		},
-	  }
+        NotFound: '*',
+        Login: {
+            screens: {
+                LoginScreen: 'login',
+            },
+        },
+        SingIn: {
+            screens: {
+                SingInScreen: 'singin',
+            },
+        },
+        SingUp: {
+            screens: {
+                SingUpScreen: 'singup',
+            },
+        },
+        Splash: {
+            screens: {
+               SplashScreen: 'splash',
+            },
+        }
     },
   },
 };
