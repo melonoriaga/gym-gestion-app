@@ -5,10 +5,9 @@ import { ActivityIndicator, View } from 'react-native';
 import { AsyncStorage } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
-
-import { AuthContext } from './components/context';
 import { NavigationContainer } from '@react-navigation/native';
 
+import { AuthContext } from './components/context';
 import LinkingConfiguration from './navigation/LinkingConfiguration';
 import RootStackScreen from './navigation/RootStackScreens';
 import RootNavigator from './navigation/RootNavigation';
@@ -59,16 +58,10 @@ export default function App() {
             let userToken;
             userToken = null;
 
-            console.log('hola')
-            console.log(email, password)
-
             if (email == 'email@email.com' && password == 'pass') {
                 try {
-                    console.log('holaaa aca antes set');
                     userToken = 'abc';
                     await AsyncStorage.setItem('userToken', userToken);
-
-                    console.log('holaaaa aca asyn')
 
                 } catch (e) {
                     console.error(e);
@@ -111,7 +104,7 @@ export default function App() {
                 type: 'RETRIVE_TOKEN',
                 token: userToken
             });
-        }, 1000)
+        }, 1000);
     }, [])
 
     if (loginState.isLoading) {
