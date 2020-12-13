@@ -133,7 +133,7 @@ export default function SinInScreen({navigation}) {
                             style={styles.inputText}
                             placeholder="email aqui.."
                             placeholderTextColor="#424874"
-                            autoCapitalize={false}
+                            autoCapitalize="none"
                             onChangeText={(val) => nameInputChange(val)}
                         />
 
@@ -170,7 +170,7 @@ export default function SinInScreen({navigation}) {
                             style={styles.inputText}
                             placeholder="email aqui.."
                             placeholderTextColor="#424874"
-                            autoCapitalize={false}
+                            autoCapitalize="none"
                             onChangeText={(val) => emailInputChange(val)}
                         />
 
@@ -208,7 +208,7 @@ export default function SinInScreen({navigation}) {
                             placeholder="Tu contraseña ..."
                             placeholderTextColor="#424874"
                             secureTextEntry={data.secureTextEntry ? true : false}
-                            autoCapitalize={false}
+                            autoCapitalize="none"
                             onChangeText={(val) => handlePasswordChange(val)}
                         />
 
@@ -256,7 +256,7 @@ export default function SinInScreen({navigation}) {
                             placeholder="Tu contraseña ..."
                             placeholderTextColor="#424874"
                             secureTextEntry={data.confirmSecureTextEntry ? true : false}
-                            autoCapitalize={false}
+                            autoCapitalize="none"
                             onChangeText={(val) => handleConfirmPasswordChange(val)}
                         />
 

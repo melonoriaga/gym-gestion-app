@@ -12,6 +12,8 @@ import {
     TouchableOpacity
 } from 'react-native';
 
+import { AuthContext } from '../../components/context';
+
 export default function SinInScreen({navigation}) {
     const [data, setData] = React.useState({
         email: '',
@@ -49,6 +51,12 @@ export default function SinInScreen({navigation}) {
             ...data,
             secureTextEntry: !data.secureTextEntry
         });
+    }
+
+    const { SingIn } = React.useContext(AuthContext);
+
+    const HandleLogin = (username: String, password: String) => {
+        SingIn(username, password)
     }
 
     return (
@@ -98,7 +106,7 @@ export default function SinInScreen({navigation}) {
                             style={styles.inputText}
                             placeholder="email aqui.."
                             placeholderTextColor="#424874"
-                            autoCapitalize={false}
+                            autoCapitalize="none"
                             onChangeText={(val) => textInputChange(val)}
                         />
 
@@ -136,7 +144,7 @@ export default function SinInScreen({navigation}) {
                             placeholder="Tu contraseña ..."
                             placeholderTextColor="#424874"
                             secureTextEntry={data.secureTextEntry ? true : false}
-                            autoCapitalize={false}
+                            autoCapitalize="none"
                             onChangeText={(val) => handlePasswordChange(val)}
                         />
 
@@ -171,6 +179,10 @@ export default function SinInScreen({navigation}) {
                 <View style={styles.buttonsContainer}>
                     <TouchableOpacity
                         style={styles.buttonPrimaryblock}
+                        onPress={() => {HandleLogin(
+                            data.email,
+                            data.password
+                        )}}
                     >
                         <Text style={styles.buttonText}>
                             Ingresar
