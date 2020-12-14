@@ -18,20 +18,10 @@ export default function RootNavigator() {
                 headerTitleAlign: 'center'
             }}
         >
-            { true ?
-                    <Stack.Screen
-                        name="Root"
-                        component={BottomTabNavigator}
-                    />
-                :
-                    <Stack.Screen
-                        name="Login"
-                        component={Login}
-                        options={{
-                            headerTitle: 'Login'
-                        }}
-                    />
-            }
+             <Stack.Screen
+                name="Root"
+                component={BottomTabNavigator}
+            />
         </Stack.Navigator>
     );
 }

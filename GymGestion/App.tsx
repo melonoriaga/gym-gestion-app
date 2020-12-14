@@ -54,23 +54,19 @@ export default function App() {
     const [loginState, dispatch] = React.useReducer(LoginReducer, initialLoginState);
 
     const authContext = React.useMemo(() => ({
-        SingIn: async (email: String, password: String) => {
-            let userToken;
-            userToken = null;
+        SingIn: async (findUser) => {
+            const userToken = String(findUser[0].userToken);
 
-            if (email == 'email@email.com' && password == 'pass') {
-                try {
-                    userToken = 'abc';
-                    await AsyncStorage.setItem('userToken', userToken);
+            try {
+                await AsyncStorage.setItem('userToken', userToken);
 
-                } catch (e) {
-                    console.error(e);
-                }
+            } catch (e) {
+                console.error(e);
             }
 
             dispatch({
                 type: 'LOGIN',
-                id: email,
+                id: findUser[0].email,
                 token: userToken
             });
         },
@@ -122,7 +118,7 @@ export default function App() {
         return (
             <AuthContext.Provider value={authContext}>
                 <SafeAreaProvider>
-                    <StatusBar backgroundColor="#5d54a4" />
+                    <StatusBar backgroundColor="#424874" />
                     <NavigationContainer linking={LinkingConfiguration}>
                         { loginState.userToken != null ?
                             <RootNavigator />

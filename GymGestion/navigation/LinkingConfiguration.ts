@@ -29,11 +29,6 @@ export default {
             },
         },
         NotFound: '*',
-        Login: {
-            screens: {
-                LoginScreen: 'login',
-            },
-        },
         SingIn: {
             screens: {
                 SingInScreen: 'singin',

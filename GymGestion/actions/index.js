@@ -1,5 +1,0 @@
-export const LOGGIN_SUCCESS       = 'LOGGIN_SUCCESS';
-export const LOGGIN_ERROR         = 'LOGGIN_ERROR';
-export const CREATE_LOGIN_SUCCESS = 'CREATE_LOGIN_SUCCESS';
-export const CREATE_LOGIN_ERROR   = 'CREATE_LOGIN_ERROR';
-

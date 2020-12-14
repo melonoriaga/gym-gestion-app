@@ -1,49 +1,95 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-
 import * as Animatable from 'react-native-animatable';
-
+import { useEffect } from 'react';
 import {
     View,
     Text,
     StyleSheet,
     Dimensions,
     TextInput,
-    TouchableOpacity
+    TouchableOpacity,
+    Alert
 } from 'react-native';
 
 import { AuthContext } from '../../components/context';
+import Users from '../../model/user';
 
 export default function SinInScreen({navigation}) {
     const [data, setData] = React.useState({
         email: '',
         password: '',
         textInputChange: false,
-        secureTextEntry: true
+        secureTextEntry: true,
+        isValidEmail: true,
+        isValidPassword: true
     });
 
-    const textInputChange = (value) => {
-        if (value.length !== 0 ) {
-            setData({
-                ...data,
-                email: value,
-                textInputChange: true
-            });
+    const textInputChange = (value: String) => {
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-        } else {
+        if (reg.test(value) === false) {
             setData({
                 ...data,
                 email: value,
                 textInputChange: false
             });
         }
+        else {
+            setData({
+                ...data,
+                email: value,
+                textInputChange: true
+            });
+        }
     }
 
-    const handlePasswordChange = (pass) => {
-        setData({
-            ...data,
-            password: pass,
-        });
+    const HandleValidateEmail = (value) => {
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+        if (reg.test(value) === false) {
+           setData({
+               ...data,
+               isValidEmail: false
+           })
+        }
+        else {
+            setData({
+                ...data,
+                isValidEmail: true
+            })
+        }
+    }
+
+    const HandleValidatePassword = (value) => {
+        console.log(value, 'value')
+        if (value.lenght < 4) {
+            setData({
+                ...data,
+                isValidPassword: false
+            })
+        } else {
+            setData({
+                ...data,
+                isValidPassword: true
+            })
+        }
+    }
+
+    const handlePasswordChange = (pass: String) => {
+        if (pass.length < 4) {
+            setData({
+                ...data,
+                password: pass,
+                isValidPassword: false
+            })
+        } else {
+            setData({
+                ...data,
+                password: pass,
+                isValidPassword: true
+            })
+        }
     }
 
     const toggleSecureEntry = () => {
@@ -55,8 +101,24 @@ export default function SinInScreen({navigation}) {
 
     const { SingIn } = React.useContext(AuthContext);
 
-    const HandleLogin = (username: String, password: String) => {
-        SingIn(username, password)
+    const HandleLogin = (email: String, password: String) => {
+        console.log('hoka', email, password);
+
+        const findUser = Users.filter( item => {
+            return email === item.email && password === item.password
+        });
+
+        console.log(findUser, 'findUser')
+
+        if (findUser.length === 0 ) {
+            Alert.alert('Ususario invalido', 'el usuario o password no conciden', [
+                {text: 'Okey'}
+            ])
+
+            return;
+        }
+
+        SingIn(findUser)
     }
 
     return (
@@ -108,6 +170,7 @@ export default function SinInScreen({navigation}) {
                             placeholderTextColor="#424874"
                             autoCapitalize="none"
                             onChangeText={(val) => textInputChange(val)}
+                            onEndEditing={(e) => HandleValidateEmail(e.nativeEvent.text)}
                         />
 
                         { data.textInputChange ?
@@ -126,6 +189,15 @@ export default function SinInScreen({navigation}) {
                             <></>
                         }
                     </View>
+
+                    {data.isValidEmail ? null :
+                        <Animatable.View
+                            animation="fadeInLeft"
+                            duration={500}
+                        >
+                            <Text style={styles.messageError}>Ingresar un email correcto</Text>
+                        </Animatable.View>
+                    }
                 </View>
 
                 <View style={styles.inputGroup}>
@@ -146,6 +218,7 @@ export default function SinInScreen({navigation}) {
                             secureTextEntry={data.secureTextEntry ? true : false}
                             autoCapitalize="none"
                             onChangeText={(val) => handlePasswordChange(val)}
+                            onEndEditing={(e) => HandleValidatePassword(e.nativeEvent.text)}
                         />
 
                         { data.secureTextEntry ?
@@ -174,6 +247,23 @@ export default function SinInScreen({navigation}) {
                             </TouchableOpacity>
                         }
                     </View>
+
+                    {data.isValidPassword ? null :
+                        <Animatable.View
+                            animation="fadeInLeft"
+                            duration={500}
+                        >
+                            <Text style={styles.messageError}>Password incorrecto</Text>
+                        </Animatable.View>
+                    }
+                </View>
+
+                <View style={styles.buttonLinkConteiner}>
+                    <TouchableOpacity
+                        style={styles.buttonLink}
+                    >
+                        <Text style={styles.buttonLinkText}>Olvide la contraseña</Text>
+                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.buttonsContainer}>
@@ -250,7 +340,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     inputGroup: {
-        marginBottom: 20
+        marginBottom: 14
     },
     inputLabel: {
         fontSize: 18,
@@ -308,7 +398,7 @@ const styles = StyleSheet.create({
         marginLeft: 20
     },
     buttonSecondaryBlock: {
-        marginTop: 30,
+        marginTop: 20,
         paddingHorizontal: 50,
         paddingVertical: 15,
         borderWidth: 1,
@@ -324,5 +414,18 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#424874',
         fontSize: 16
+    },
+    messageError: {
+        marginBottom: 10,
+        color: '#ea2c62',
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    buttonLink: {
+        padding: 10
+    },
+    buttonLinkText: {
+        textAlign: 'center',
+        color: '#424874',
     }
 })
