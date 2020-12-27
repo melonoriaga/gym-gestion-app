@@ -6,9 +6,9 @@ export default {
     screens: {
         Root: {
             screens: {
-                TabOne: {
+                Student: {
                     screens: {
-                        TabOneScreen: 'one',
+                        StudentScreen: 'one',
                     },
                 },
                 TabTwo: {
@@ -28,10 +28,9 @@ export default {
                 },
             },
         },
-        NotFound: '*',
-        Login: {
+        StudentDetail: {
             screens: {
-                LoginScreen: 'login',
+                StudentDetailScreen: 'StudentDetail',
             },
         },
         SingIn: {
