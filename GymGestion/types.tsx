@@ -1,11 +1,10 @@
 export type RootStackParamList = {
   Root: undefined;
-  NotFound: undefined;
-  Login: undefined;
+  StudenDetail: undefined;
 };
 
 export type BottomTabParamList = {
-  TabOne: undefined;
+  Student: undefined;
   TabTwo: undefined;
   TabThree: undefined;
   Settings: undefined;
@@ -14,9 +13,9 @@ export type BottomTabParamList = {
   SingUp: undefined
 };
 
-export type TabOneParamList = {
-	TabOneScreen: undefined;
-  };
+export type StudentParamList = {
+	StudentScreen: undefined;
+};
 
 export type TabTwoParamList = {
   TabTwoScreen: undefined;
@@ -30,8 +29,8 @@ export type SettingsParamList = {
 	SettingsScreen: undefined;
 };
 
-export type LoginParamList = {
-	LoginScreen: undefined;
+export type StudenDetailParamList = {
+	StudenDetailScreen: undefined;
 };
 
 export type SplashParamList = {

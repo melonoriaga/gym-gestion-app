@@ -5,14 +5,14 @@ import * as React from 'react';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
+import StudentScreen from '../screens/StudentScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import TabThreeScreen from '../screens/TabThreeScreen';
 import Settings from '../screens/Settings';
 
 import {
     BottomTabParamList,
-    TabOneParamList,
+    StudentParamList,
     TabTwoParamList,
     TabThreeParamList,
     SettingsParamList
@@ -27,12 +27,12 @@ export default function BottomTabNavigator() {
         <BottomTab.Navigator
             activeColor="#f0edf6"
             inactiveColor="#3e2465"
-            initialRouteName="TabOne"
+            initialRouteName="Student"
             tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
         >
             <BottomTab.Screen
                 name="Fits"
-                component={TabOneNavigator}
+                component={StudentNavigator}
                 options={{
                     tabBarColor: "#5d54a4",
                     tabBarIcon: ({ color }) => <TabBarIcon name="ios-flash" color={color} />,
@@ -73,14 +73,14 @@ function TabBarIcon(props: { name: string; color: string }) {
   return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
 }
 
-const TabOneStack = createStackNavigator<TabOneParamList>();
+const StudentStack = createStackNavigator<StudentParamList>();
 
-function TabOneNavigator() {
+function StudentNavigator() {
   return (
-    <TabOneStack.Navigator>
-        <TabOneStack.Screen
-            name="TabOneScreen"
-            component={TabOneScreen}
+    <StudentStack.Navigator>
+        <StudentStack.Screen
+            name="StudentScreen"
+            component={StudentScreen}
             options={{
                 headerTitle: 'Aca los compas',
                 headerStyle: {
@@ -90,7 +90,7 @@ function TabOneNavigator() {
                 headerTitleAlign: 'center'
             }}
         />
-    </TabOneStack.Navigator>
+    </StudentStack.Navigator>
   );
 }
 

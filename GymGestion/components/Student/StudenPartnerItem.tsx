@@ -20,20 +20,11 @@ export default function StudentContainer({items}) {
                 </Text>
 
                 <View style={styles.gymAndRutine}>
-                    <Text style={styles.gymTitle}>
-                        { items.gimansio }
-                    </Text>
-
-                    { false ?
-                        <View style={styles.rutineLabel}>
-                            <Text style={styles.rutineTitle}>
-                                { items.ejercicio }
-                            </Text>
-                        </View>
-                        :
-                        <></>
-                    }
-
+                    <View style={styles.rutineLabel}>
+                        <Text style={styles.rutineTitle}>
+                            { items.ejercicio }
+                        </Text>
+                    </View>
                 </View>
             </View>
 

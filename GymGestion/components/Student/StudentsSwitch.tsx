@@ -1,28 +1,98 @@
-import * as React from 'react';
+import React, { Component } from "react";
 import {View, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import PropTypes from 'prop-types';
 
-export default function StudentContainer() {
-    return (
-        <View
-            style={[styles.conainer]}
-        >
-            <TouchableOpacity
-                style={[styles.button, styles.active]}
-                onPress={() => {alert('oka')}}
-            >
-                <Text style={[styles.buttonText, styles.activeText]}>Compañeros</Text>
-            </TouchableOpacity>
+export default class StudentContainer extends Component {
+    static propTypes = {
+        ListPartnerStudents: PropTypes.func,
+        ListZoneStudents: PropTypes.func,
+        ListExamplesStudents: PropTypes.func,
+        activeButtonPartner: PropTypes.Object
+	}
 
-            <TouchableOpacity
-                onPress={() => {alert('oka')}}
-                style={[styles.button]}
+    render() {
+        return (
+            <View
+                style={[styles.conainer]}
             >
-                <Text style={styles.buttonText}>Zona</Text>
-            </TouchableOpacity>
-        </View>
-  );
-}
+                { this.props.activeButtonPartner.showExplamplelist &&
+                    <>
+                        <TouchableOpacity
+                            style={[styles.button]}
+                            onPress={() => this.props.ListPartnerStudents()}
+                        >
+                            <Text style={[styles.buttonText]}>Compañeros</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={[styles.button, styles.active]}
+                            onPress={() => this.props.ListExamplesStudents()}
+                        >
+                            <Text style={[styles.buttonText, styles.activeText]}>Ejemplos</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            onPress={() => this.props.ListZoneStudents()}
+                            style={[styles.button]}
+                        >
+                            <Text style={[styles.buttonText]}>Zona</Text>
+                        </TouchableOpacity>
+                    </>
+                }
+
+                { this.props.activeButtonPartner.showPartnerList &&
+                    <>
+                        <TouchableOpacity
+                            style={[styles.button, styles.active]}
+                            onPress={() => this.props.ListPartnerStudents()}
+                        >
+                            <Text style={[styles.buttonText, styles.activeText]}>Compañeros</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={[styles.button]}
+                            onPress={() => this.props.ListExamplesStudents()}
+                        >
+                            <Text style={[styles.buttonText]}>Ejemplos</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            onPress={() => this.props.ListZoneStudents()}
+                            style={[styles.button]}
+                        >
+                            <Text style={[styles.buttonText]}>Zona</Text>
+                        </TouchableOpacity>
+                    </>
+                }
+
+                { this.props.activeButtonPartner.showZoneList &&
+                    <>
+                        <TouchableOpacity
+                            style={[styles.button]}
+                            onPress={() => this.props.ListPartnerStudents()}
+                        >
+                            <Text style={[styles.buttonText]}>Compañeros</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={[styles.button]}
+                            onPress={() => this.props.ListExamplesStudents()}
+                        >
+                            <Text style={[styles.buttonText]}>Ejemplos</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={[styles.button, styles.active]}
+                            onPress={() => this.props.ListZoneStudents()}
+                        >
+                            <Text style={[styles.buttonText, styles.activeText]}>Zona</Text>
+                        </TouchableOpacity>
+                    </>
+                }
+            </View>
+        );
+    }
+};
 
 const styles = StyleSheet.create({
     conainer: {

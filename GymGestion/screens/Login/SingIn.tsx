@@ -102,13 +102,9 @@ export default function SinInScreen({navigation}) {
     const { SingIn } = React.useContext(AuthContext);
 
     const HandleLogin = (email: String, password: String) => {
-        console.log('hoka', email, password);
-
         const findUser = Users.filter( item => {
             return email === item.email && password === item.password
         });
-
-        console.log(findUser, 'findUser')
 
         if (findUser.length === 0 ) {
             Alert.alert('Ususario invalido', 'el usuario o password no conciden', [

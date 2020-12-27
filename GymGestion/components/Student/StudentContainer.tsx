@@ -1,20 +1,53 @@
 import * as React from 'react';
-import {View, Text, StyleSheet, FlatList, TextInput } from 'react-native';
+import {View, StyleSheet, FlatList, TextInput } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import StudentFilter from './StudenFilters';
-import StudenItem from './StudenItem';
+import StudenPartnerItem from './StudenPartnerItem';
+import StudenZoneItem from './StudenZoneItem';
 import StudentsSwitch from './StudentsSwitch';
 import alumnos from '../../model/alumnos';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 
-export default function StudentContainer() {
+export default function StudentContainer({pressStudentDetail, pressStudentZoneDetail}) {
+    const [data, setData] = React.useState({
+        showPartnerList: true,
+        showExplamplelist: false,
+        showZoneList: false,
+    });
+
+    const HandleListPartnerStudents = () => {
+        setData({
+            ...data,
+            showPartnerList: true,
+            showExplamplelist: false,
+            showZoneList: false
+        });
+    };
+
+    const HandleListZoneStudents = () => {
+        setData({
+            ...data,
+            showPartnerList: false,
+            showExplamplelist: false,
+            showZoneList: true
+        });
+    };
+
+    const HandleListExamples = () => {
+        setData({
+            ...data,
+            showPartnerList: false,
+            showExplamplelist: true,
+            showZoneList: false
+        })
+    }
+
     return (
         <View style={styles.container}>
             {/* <StudentFilter /> */}
 
             <View style={styles.inputContainer}>
-
                 <Ionicons
                     style={styles.inputIcon}
                     name="md-search"
@@ -28,14 +61,52 @@ export default function StudentContainer() {
                 />
             </View>
 
-
-            <StudentsSwitch />
+            <StudentsSwitch
+                ListPartnerStudents={() => {HandleListPartnerStudents()}}
+                ListZoneStudents={() => {HandleListZoneStudents()}}
+                ListExamplesStudents={() => {HandleListExamples()}}
+                activeButtonPartner={data}
+            />
 
             <ScrollView>
-                <FlatList
-                    data={alumnos}
-                    renderItem={({item}) => <StudenItem items={item} />}
-                />
+                { data.showExplamplelist &&
+                    <FlatList
+                        data={alumnos}
+                        renderItem={({item}) =>
+                            <TouchableOpacity
+                                onPress={ () => pressStudentZoneDetail()}
+                            >
+                                <StudenPartnerItem items={item} />
+                            </TouchableOpacity>
+                        }
+                    />
+                }
+
+                { data.showPartnerList &&
+                    <FlatList
+                        data={alumnos}
+                        renderItem={({item}) =>
+                            <TouchableOpacity
+                                onPress={ () => pressStudentDetail()}
+                            >
+                                <StudenPartnerItem items={item} />
+                            </TouchableOpacity>
+                        }
+                    />
+                }
+
+                { data.showZoneList &&
+                    <FlatList
+                        data={alumnos}
+                        renderItem={({item}) =>
+                            <TouchableOpacity
+                                onPress={ () => pressStudentZoneDetail()}
+                            >
+                                <StudenZoneItem items={item} />
+                            </TouchableOpacity>
+                        }
+                    />
+                }
             </ScrollView>
         </View>
   );
